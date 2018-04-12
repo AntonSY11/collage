@@ -21,6 +21,7 @@ Auth::routes();
 
 
 
+
 //Route::get('/', function () {
 //    return view('main.master');
 //});
