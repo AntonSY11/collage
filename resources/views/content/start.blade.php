@@ -2,6 +2,9 @@
 
 
 @section('content')
+
+
+
     <div class="container">
         <div class="row">
             <div class="col s8 offset-s2">
@@ -19,7 +22,12 @@
                             i qui repellendus, similique totam ullam ut vero!</p>
                     </div>
                     <div class="card-action">
-                        <a href="{{ route('choose-collage') }}" class="waves-effect waves-light btn  amber accent-3 pulse"><i class="material-icons left">send</i>Создать коллаж</a>
+                        <a href="
+                                @auth
+                                    {{ url('choose-collage') }}
+                                @else
+                                    {{ route('login') }}
+                                @endauth" class="waves-effect waves-light btn  amber accent-3 pulse"><i class="material-icons left">send</i>Создать коллаж</a>
                     </div>
                 </div>
             </div>

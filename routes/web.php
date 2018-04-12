@@ -11,11 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('content.start');
-});
+Route::get('/', 'CollageController@index');
 
 
-Route::get('/choose-collage', function () {
-    return view('content.choose-collage');
-})->name('choose-collage');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('choose-collage', 'CollageController@choose_collage');
+Route::post('choose-collage', 'CollageController@store');
