@@ -12,5 +12,10 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('content.start');
 });
+
+
+Route::get('/choose-collage', function () {
+    return view('content.choose-collage');
+})->name('choose-collage');
