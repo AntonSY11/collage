@@ -10,8 +10,10 @@
             <div class="card blue-grey darken-1">
                 <form action="{{ url('choose-collage') }}" method="post">
                     @csrf
+        <p style="color: #f44336; text-align: center; margin: 0; font-size: 20px;">{{ session()->get('message') }}</p>
                     <div class="card-content white-text">
                         <span class="card-title">Выберите коллаж</span>
+
                         <div class="row image">
                             @foreach($collages as $collage)
                             <div class="col s4">
@@ -29,7 +31,7 @@
                         </div>
                     </div>
                     <div class="card-action">
-                        <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit" name="action">Дальше
+                        <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit" name="action">Загрузить фотографии
                             <i class="material-icons right">send</i>
                         </button>
                     </div>

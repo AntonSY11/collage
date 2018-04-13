@@ -18,5 +18,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+
 Route::get('choose-collage', 'CollageController@choose_collage');
 Route::post('choose-collage', 'CollageController@store');
+
+
+Route::get('download-image', 'ImageDownloadController@index');
+Route::post('download-image', 'ImageDownloadController@store');

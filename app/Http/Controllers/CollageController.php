@@ -10,16 +10,13 @@ class CollageController extends Controller
 {
 
     //view start page
-
     public function index()
     {
         return view('content.start');
 
     }
 
-
     //view page choosing collage and deduces all collage from DB
-
     public function choose_collage()
     {
         $collages = Collage::all();
@@ -29,23 +26,26 @@ class CollageController extends Controller
     }
 
 
-
-
-
     //handler for chhose-collage
     public function store(Request $request)
     {
 
-        $user = Auth::user()->id;
         $collage_name = $request->collage;
 
-        $request->session()->put([
-            'user_id' => $user,
-            'collage_name' => $collage_name
-        ]);
+        if ($collage_name != null){
+            $user = Auth::user()->id;
+            $request->session()->put([
+                'user_id' => $user,
+                'collage_name' => $collage_name
+            ]);
 
-        dd($request->session()->all());
 
-        return view('content.choose-collage');
+            return redirect('download-image');
+        }
+        else {
+            return back()->with('message', 'Не выбрали коллаж');
+        }
+
     }
+
 }
