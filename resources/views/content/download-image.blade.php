@@ -17,11 +17,16 @@
                             <form action="{{ url('download-image') }}" method="post" enctype="multipart/form-data">
 
                                 <p style="color: #f44336; text-align: center; margin: 0; font-size: 20px;">{{ session()->get('message') }}</p>
+                                @if($errors->any())
+                                @foreach($errors->all() as $error)
+                                        <p style="color: #f44336; text-align: center; margin: 0; font-size: 20px;">{{ $error }}</p>
+                                @endforeach
+                                @endif
                                 {{ csrf_field() }}
                                 <div class="file-field input-field">
                                     <div class="btn">
                                         <span>File</span>
-                                        <input type="file" name="image[]" multiple>
+                                        <input type="file" name="images[]" multiple>
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text" placeholder="Upload one or more files">

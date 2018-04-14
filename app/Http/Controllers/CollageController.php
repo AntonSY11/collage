@@ -43,7 +43,7 @@ class CollageController extends Controller
             return redirect('download-image');
         }
         else {
-            return back()->with('message', 'Не выбрали коллаж');
+            return back()->with('message', 'Упс, кажется вы не выбрали макет колажа!');
         }
 
     }

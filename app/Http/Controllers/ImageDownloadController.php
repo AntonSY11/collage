@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class ImageDownloadController extends Controller
 {
@@ -13,17 +14,24 @@ class ImageDownloadController extends Controller
     }
 
     public function store(Request $request) {
-        $files = $request->file('image');
+        $images = $request->all();
 
-        if (is_null($files)){
-            return back()->with('message', 'Нет файла');
+        $rules = [
+            'images' => 'required|array|max:6',
+            'images.*' => 'mimes:png,jpg,jpeg|max:2000'
+        ];
+
+        $validator = Validator::make($images, $rules);
+
+        if ($validator->fails()){
+            return back()->withErrors($validator);
         }
-        else{
+        else {
+            foreach ($images as $image){
 
-            foreach ($files as $file){
-                $file->move(public_path('image'), $file->getClientOriginalName());
             }
             return back();
         }
+
     }
 }
