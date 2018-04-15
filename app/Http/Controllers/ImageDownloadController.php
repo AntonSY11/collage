@@ -42,8 +42,11 @@ class ImageDownloadController extends Controller
                 $image->name = $filename;
                 $image->session_id = session()->getId();
                 $image->save();
+                if ($image->save()){
+                    return redirect('distribution');
+                }
             }
-            return back();
+
 
 
         }

@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="card-action">
-                                    <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit" name="action">Загрузить фотографии
+                                    <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit" name="action">Распределить
                                         <i class="material-icons right">send</i>
                                     </button>
                                 </div>

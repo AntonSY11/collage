@@ -26,3 +26,6 @@ Route::post('choose-collage', 'CollageController@store');
 
 Route::get('download-image', 'ImageDownloadController@index');
 Route::post('download-image', 'ImageDownloadController@store');
+
+
+Route::get('distribution', 'DistributionController@index');
