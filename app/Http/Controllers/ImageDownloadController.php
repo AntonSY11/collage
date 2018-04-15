@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
+use App\Image;
+
+
+
 
 class ImageDownloadController extends Controller
 {
@@ -16,8 +19,10 @@ class ImageDownloadController extends Controller
     public function store(Request $request) {
         $images = $request->all();
 
+
+
         $rules = [
-            'images' => 'required|array|max:6',
+            'images' => 'required|array',
             'images.*' => 'mimes:png,jpg,jpeg|max:2000'
         ];
 
@@ -27,11 +32,20 @@ class ImageDownloadController extends Controller
             return back()->withErrors($validator);
         }
         else {
-            foreach ($images as $image){
 
+            foreach ($request->file('images') as $image) {
+                $filename = $image->move(('images'), time().'_'.$image->getClientOriginalName());
+
+                //downloading image into DB
+                $image = new Image;
+                $image->user_id = session()->get('user_id');
+                $image->name = $filename;
+                $image->session_id = session()->getId();
+                $image->save();
             }
             return back();
-        }
 
+
+        }
     }
 }
