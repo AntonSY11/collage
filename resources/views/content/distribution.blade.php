@@ -14,7 +14,9 @@
                             <li>- Вы можете нажать кнопку "Предпросмотр" и посмотреть как будет выглядить ваш коллаж</li>
                         </ul>
                         <span class="card-title">Ваш выбранный макет</span>
-                        <img style="width: 50%;" src="{{ url($collage) }}" alt="">
+                        @foreach($collage as $maket)
+                            <img style="width: 50%;" src="{{ url($maket->path) }}" alt="">
+                        @endforeach
 
                         <form action="{{ url('distribution') }}" method="post">
 
@@ -22,26 +24,39 @@
 
                             {{ csrf_field() }}
 
+                            <table class="centered highlight">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Фотография</th>
+                                    <th>Действия</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                @foreach($images as $image)
+                                    <tr>
+                                        <td>{{$loop->index+1}}</td>
+                                        <td><img style="width: 20%; margin: 0;" src="{{ $image->name }}" alt=""></td>
+                                        <td style="width: 200px;">
+                                                @for($i = 1; $i <= $maket->count_field; $i++)
+                                                    <label>
+                                                            <input name="position[{{ $image->id }}]" value="{{ $i }}" type="radio">
+                                                            <span>Секция № {{ $i }}</span>
+                                                    </label>
+                                                @endfor
+                                        </td>
+                                    </tr>
+                                @endforeach
 
 
-                            <div class="col s12 m8 offset-m2 l6 offset-l3">
-                                <div class="card-panel grey lighten-5 z-depth-1">
-                                    <div class="row valign-wrapper">
-                                        <div class="col s2">
-                                            <img src="{{ url('image/1523787464_5DM30314.png') }}" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                                        </div>
-                                        <div class="col s10">
-                                        <span class="black-text">
-                                            This is a square image. Add the "circle" class to it to make it appear circular.
-                                        </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                                </tbody>
+                            </table>
 
 
                             <div class="card-action">
-                                <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit" name="action">Загрузить фотографии
+                                <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit">Предпросмотр
                                     <i class="material-icons right">send</i>
                                 </button>
                             </div>
@@ -53,3 +68,4 @@
         </div>
     </div>
 @endsection
+

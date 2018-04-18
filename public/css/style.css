@@ -19,3 +19,7 @@ h1{
 img {
     width: 84%; !important;
 }
+
+th{
+    text-align: center;!important;
+}

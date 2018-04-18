@@ -29,3 +29,7 @@ Route::post('download-image', 'ImageDownloadController@store');
 
 
 Route::get('distribution', 'DistributionController@index');
+Route::post('distribution', 'DistributionController@store');
+
+Route::get('distribution/preview', 'PreviewController@index');
+//Route::post('distribution', 'DistributionController@store');
