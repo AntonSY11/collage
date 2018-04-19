@@ -9,6 +9,7 @@
             <div class="col s8 offset-s2">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
+                        <p style="color: #f44336; text-align: center; margin: 0; font-size: 20px;">{{ session()->get('message') }}</p>
                         <span class="card-title">Добро пожаловать!</span>
                         <p>I am a very simple card. I am good at containing small bits of information.
                             I am convenient because I require little markup to use effectively.

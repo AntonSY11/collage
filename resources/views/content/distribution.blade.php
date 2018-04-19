@@ -56,6 +56,11 @@
 
 
                             <div class="card-action">
+
+                                <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit" name="download">Скачать
+                                    <i class="material-icons right">send</i>
+                                </button>
+
                                 <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit">Предпросмотр
                                     <i class="material-icons right">send</i>
                                 </button>
