@@ -8,6 +8,17 @@
             <div class="col s8 offset-s2">
                 <div class="card blue-grey darken-1">
                     <div class="card-content white-text">
+
+                        @if(!empty($images->toArray()))
+                            <p>В вашей сессии уже имеются загруженные фотографии, вы можете либо <a href="{{ url('download-image/delete') }}">УДАЛИТЬ</a> их, либо продолжить работать с этими фотографиями нажав кнопку распределить</p>
+                        <div class="row">
+                            @foreach($images as $image)
+                                <img style="width: 10%; opacity: .5" src="{{ $image->name }}" alt="">
+                            @endforeach
+                        </div>
+                        @else
+                        @endif
+{{--                            {{ dd($images) }}--}}
                         <span class="card-title">Загрузите пожалуйста фотографии</span>
                         <p>Количество загружаемых фотографий ограничено:</p>
                         <ul>

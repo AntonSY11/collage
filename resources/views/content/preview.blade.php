@@ -12,7 +12,7 @@
                         <span class="card-title">Как выглядит ваш макет</span>
 
                             <img style="width: 50%;" src="" alt="">
-{{ $baseView }}
+                            {{ $baseView }}
 
                             <div class="card-action">
                                 <button class="btn waves-effect waves-light amber accent-3 pulse" type="submit" name="action">Предпросмотр

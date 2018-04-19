@@ -18,18 +18,24 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::middleware('auth')->group(function () {
+    Route::get('choose-collage', 'CollageController@choose_collage');
+    Route::post('choose-collage', 'CollageController@store');
+
+    Route::get('download-image', 'ImageDownloadController@index');
+    Route::post('download-image', 'ImageDownloadController@store');
+
+    Route::get('distribution', 'DistributionController@index');
+    Route::post('distribution', 'DistributionController@store');
+
+    Route::get('download-image/delete' ,'DeleteSessionImageController@delete');
+});
 
 
-Route::get('choose-collage', 'CollageController@choose_collage');
-Route::post('choose-collage', 'CollageController@store');
 
 
-Route::get('download-image', 'ImageDownloadController@index');
-Route::post('download-image', 'ImageDownloadController@store');
 
 
-Route::get('distribution', 'DistributionController@index');
-Route::post('distribution', 'DistributionController@store');
-
-Route::get('distribution/preview', 'PreviewController@index');
+//Route::get('distribution/preview', 'PreviewController@index');
 //Route::post('distribution', 'DistributionController@store');
+

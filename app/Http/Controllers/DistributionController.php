@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 use App\Collage;
 use Intervention\Image\ImageManager;
 use Image;
+use App\UserCollage;
 use Illuminate\Support\Str;
 
 
 class DistributionController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
+
+
+//        dd(session()->all());
 
         //get images from DB by session_id
         $images = \App\Image::all()->where('session_id', session()->getId());
@@ -111,10 +115,28 @@ class DistributionController extends Controller
                     $base_image->insert($third, 'bottom-left', 50, 50);
                     $base_image->insert($fourth, 'bottom-right', 50, 50);
 
-
                     //сохраннение коллажа с рандомным именем
                     $base_image->save('user_collage/' . Str::random(20) .'.jpg');
-                    return back()->with('message', 'Ваш коллаж сохранен и всегда хранится в вашем личном кабинете');
+
+
+                    //УДАЛЕНИЕ ЗАГРУЖЕННЫХ ФОТОГРАФИЙ ПОЛЬЗОВАТЕЛЕМ
+                    unlink(public_path($first->dirname . '/' . $first->basename));
+                    unlink(public_path($second->dirname . '/' . $second->basename));
+                    unlink(public_path($third->dirname . '/' . $third->basename));
+                    unlink(public_path($fourth->dirname . '/' . $fourth->basename));
+
+                    //УДАЛЕНИЕ ФОТОГРАФИЙ С БД
+                    $images_del = new \App\Image;
+                    $images_del->where('session_id', session()->getId())->delete();
+
+                    //ЗАПИСЬ ДАННЫХ О КОЛЛАЖЕ ЮЗЕРА В БД
+                    $user_collage = new UserCollage;
+                    $user_collage->user_id = session()->get('user_id');
+                    $user_collage->path =$base_image->dirname. '/' . $base_image->basename;
+                    $user_collage->save();
+
+
+                    return redirect('/')->with('message', 'Ваш коллаж сохранен и всегда хранится в вашем личном кабинете');
 
                 } elseif (session()->get('collage_name') == 'collage2') {
 
@@ -144,7 +166,23 @@ class DistributionController extends Controller
 
                     //сохраннение коллажа с рандомным именем
                     $base_image->save('user_collage/' . Str::random(20) .'.jpg');
-                    return back()->with('message', 'Ваш коллаж сохранен и всегда хранится в вашем личном кабинете');
+
+                    //УДАЛЕНИЕ ЗАГРУЖЕННЫХ ФОТОГРАФИЙ ПОЛЬЗОВАТЕЛЕМ
+                    unlink(public_path($first->dirname . '/' . $first->basename));
+                    unlink(public_path($second->dirname . '/' . $second->basename));
+                    unlink(public_path($third->dirname . '/' . $third->basename));
+
+                    //УДАЛЕНИЕ ФОТОГРАФИЙ С БД
+                    $images_del = new \App\Image;
+                    $images_del->where('session_id', session()->getId())->delete();
+
+                    //ЗАПИСЬ ДАННЫХ О КОЛЛАЖЕ ЮЗЕРА В БД
+                    $user_collage = new UserCollage;
+                    $user_collage->user_id = session()->get('user_id');
+                    $user_collage->path =$base_image->dirname. '/' . $base_image->basename;
+                    $user_collage->save();
+
+                    return redirect('/')->with('message', 'Ваш коллаж сохранен и всегда хранится в вашем личном кабинете');
 
                 } elseif (session()->get('collage_name') == 'collage3') {
                     //поиск назнаечение фотографии в перавый отдел коллажа
@@ -172,6 +210,22 @@ class DistributionController extends Controller
 
                     //сохраннение коллажа с рандомным именем
                     $base_image->save('user_collage/' . Str::random(20) .'.jpg');
+
+                    //УДАЛЕНИЕ ЗАГРУЖЕННЫХ ФОТОГРАФИЙ ПОЛЬЗОВАТЕЛЕМ
+                    unlink(public_path($first->dirname . '/' . $first->basename));
+                    unlink(public_path($second->dirname . '/' . $second->basename));
+                    unlink(public_path($third->dirname . '/' . $third->basename));
+
+                    //УДАЛЕНИЕ ФОТОГРАФИЙ С БД
+                    $images_del = new \App\Image;
+                    $images_del->where('session_id', session()->getId())->delete();
+
+                    //ЗАПИСЬ ДАННЫХ О КОЛЛАЖЕ ЮЗЕРА В БД
+                    $user_collage = new UserCollage;
+                    $user_collage->user_id = session()->get('user_id');
+                    $user_collage->path =$base_image->dirname. '/' . $base_image->basename;
+                    $user_collage->save();
+
                     return redirect('/')->with('message', 'Ваш коллаж сохранен и всегда хранится в вашем личном кабинете');
                 }
             }

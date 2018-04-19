@@ -17,7 +17,7 @@ class CreateUserCollageTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('collage_id')->unsigned();
+            $table->integer('collage_id')->unsigned()->nullable();
             $table->foreign('collage_id')->references('id')->on('collage');
         });
     }

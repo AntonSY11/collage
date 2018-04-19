@@ -10,7 +10,7 @@
                     <li>Добро пожаловать, {{ Auth::user()->name }} !</li>
                     <li><a href="{{ route('logout') }}" aria-labelledby="navbarDropdown" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();" class="waves-effect waves-light btn grey darken-3">
-                            {{ __('Logout') }}
+                            Выйти
                         </a></li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
