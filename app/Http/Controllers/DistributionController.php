@@ -31,20 +31,6 @@ class DistributionController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function store(Request $request)
     {
 
@@ -97,48 +83,35 @@ class DistributionController extends Controller
             return back()->with('message', "В вашем коллаже может размещаться максимум $item->count_field фотографии, вы пытаетесь разместить $img_count");
         }
         else {
-            //вевести изображение
+            //Вывод коллажа №1 с выбранными картинками
             if (session()->get('collage_name') == 'collage1') {
                 //поиск назнаечение фотографии в перавый отдел коллажа
                 $first_arr = \App\Image::all()->where('id', array_search(1, $array_image));
                 foreach ($first_arr as $first) ;
-                $first = $first->name;
+                $first = Image::make($first->name)->heighten(625)->crop(625,625);
 
                 //поиск назнаечение фотографии во второй отдел коллажа
                 $second_arr = \App\Image::all()->where('id', array_search(2, $array_image));
                 foreach ($second_arr as $second) ;
-                $second = $second->name;
+                $second = Image::make($second->name)->heighten(625)->crop(625,625);
 
                 //поиск назнаечение фотографии в третий отдел коллажа
                 $third_arr = \App\Image::all()->where('id', array_search(3, $array_image));
                 foreach ($third_arr as $third) ;
-                $third = $third->name;
+                $third = Image::make($third->name)->heighten(625)->crop(625,625);
 
                 //поиск назнаечение фотографии во четвертый отдел коллажа
                 $fourth_arr = \App\Image::all()->where('id', array_search(4, $array_image));
                 foreach ($fourth_arr as $fourth) ;
-                $fourth = $fourth->name;
+                $fourth = Image::make($fourth->name)->heighten(625)->crop(625,625);
 
                 //-------------ФОРМИРОВАНИЕ КОЛЛАЖА----------------
                 $base_image = Image::make($layout);
 
-
-
-                $first_insert = Image::make($first)->height();
-
-                dd($first_insert);
-                $first_insert = Image::make($first)->heighten(625)->crop(625,625);
-//                $second_insert = Image::make($second)->resize(625,625);
-//                $third_insert = Image::make($third)->resize(625,625);
-//                $fourth_insert = Image::make($fourth)->resize(625,625);
-
-
-
-
-                $base_image->insert($first_insert, 'top-right', 50, 50);
-//                $base_image->insert($second_insert, 'top-right', 50, 50);
-//                $base_image->insert($third_insert, 'bottom-left', 50, 50);
-//                $base_image->insert($fourth_insert, 'bottom-right', 50, 50);
+                $base_image->insert($first, 'top-right', 50, 50);
+                $base_image->insert($second, 'top-left', 50, 50);
+                $base_image->insert($third, 'bottom-left', 50, 50);
+                $base_image->insert($fourth, 'bottom-right', 50, 50);
 
 
 
@@ -147,8 +120,55 @@ class DistributionController extends Controller
 
             } elseif (session()->get('collage_name') == 'collage2') {
 
+
+                //поиск назнаечение фотографии в перавый отдел коллажа
+                $first_arr = \App\Image::all()->where('id', array_search(1, $array_image));
+                foreach ($first_arr as $first) ;
+                $first = Image::make($first->name)->heighten(625)->crop(625,625);
+
+                //поиск назнаечение фотографии во второй отдел коллажа
+                $second_arr = \App\Image::all()->where('id', array_search(2, $array_image));
+                foreach ($second_arr as $second) ;
+                $second = Image::make($second->name)->heighten(625)->crop(625,625);
+
+                //поиск назнаечение фотографии в третий отдел коллажа
+                $third_arr = \App\Image::all()->where('id', array_search(3, $array_image));
+                foreach ($third_arr as $third) ;
+                $third = Image::make($third->name)->heighten(1300)->crop(625,1300);
+
+
+                //-------------ФОРМИРОВАНИЕ КОЛЛАЖА----------------
+                $base_image = Image::make($layout);
+
+                $base_image->insert($first, 'top-left', 50, 50);
+                $base_image->insert($second, 'bottom-left', 50, 50);
+                $base_image->insert($third, 'right', 50, 50);
+                return $base_image->response();
+
             } elseif (session()->get('collage_name') == 'collage3') {
-                echo 'good 3';
+                //поиск назнаечение фотографии в перавый отдел коллажа
+                $first_arr = \App\Image::all()->where('id', array_search(1, $array_image));
+                foreach ($first_arr as $first) ;
+                $first = Image::make($first->name)->heighten(625)->crop(625,625);
+
+                //поиск назнаечение фотографии во второй отдел коллажа
+                $second_arr = \App\Image::all()->where('id', array_search(2, $array_image));
+                foreach ($second_arr as $second) ;
+                $second = Image::make($second->name)->heighten(625)->crop(625,625);
+
+                //поиск назнаечение фотографии в третий отдел коллажа
+                $third_arr = \App\Image::all()->where('id', array_search(3, $array_image));
+                foreach ($third_arr as $third) ;
+                $third = Image::make($third->name)->heighten(625)->widen(1300)->crop(1300, 625);
+
+
+                //-------------ФОРМИРОВАНИЕ КОЛЛАЖА----------------
+                $base_image = Image::make($layout);
+
+                $base_image->insert($first, 'top-left', 50, 50);
+                $base_image->insert($second, 'top-right', 50, 50);
+                $base_image->insert($third, 'bottom', 50, 50);
+                return $base_image->response();
             }
         }
     }
