@@ -8,6 +8,7 @@
                     <li><a class="waves-effect waves-light btn grey darken-3" href="{{ route('register') }}">Регистрация</a></li>
                 @else
                     <li>Добро пожаловать, {{ Auth::user()->name }} !</li>
+                    <li><a href="{{ url('profile') }}" aria-labelledby="navbarDropdown" class="Medium"><i style="font-size: 35px" class="material-icons right">perm_identity</i></a></li>
                     <li><a href="{{ route('logout') }}" aria-labelledby="navbarDropdown" onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();" class="waves-effect waves-light btn grey darken-3">
                             Выйти

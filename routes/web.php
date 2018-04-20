@@ -29,7 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::post('distribution', 'DistributionController@store');
 
     Route::get('download-image/delete' ,'DeleteSessionImageController@delete');
+
+    Route::get('profile', 'ProfileController@index');
+    Route::post('profile', 'ProfileController@store');
 });
+
+
 
 
 
@@ -39,3 +44,8 @@ Route::middleware('auth')->group(function () {
 //Route::get('distribution/preview', 'PreviewController@index');
 //Route::post('distribution', 'DistributionController@store');
 
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

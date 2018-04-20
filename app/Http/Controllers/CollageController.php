@@ -12,6 +12,12 @@ class CollageController extends Controller
     //view start page
     public function index()
     {
+        if (Auth::user()){
+            $user = Auth::user()->id;
+            session()->put([
+                'user_id' => $user,
+            ]);
+        }
         return view('content.start');
 
     }
@@ -19,6 +25,7 @@ class CollageController extends Controller
     //view page choosing collage and deduces all collage from DB
     public function choose_collage()
     {
+
         $collages = Collage::all();
         return view('content.choose-collage', [
             'collages' => $collages
@@ -33,9 +40,7 @@ class CollageController extends Controller
         $collage_name = $request->collage;
 
         if ($collage_name != null){
-            $user = Auth::user()->id;
             $request->session()->put([
-                'user_id' => $user,
                 'collage_name' => $collage_name
             ]);
 

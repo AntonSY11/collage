@@ -29,16 +29,11 @@ class ImageDownloadController extends Controller
         foreach ($collage as $item);
 
 
-        if(!empty($images_from_db)){
-            if (count($request->file('images')) < $item->count_field)
-                return back()->with('message', 'Вы пытаетесь загрузить меньше фотографий чем у вас полей в коллаже');
-            else
+        if(!empty($images_from_db) AND count($images_from_db) >= $item->count_field){
                 return redirect('distribution');
         }
         else{
-
-
-            if (count($request->file('images')) < $item->count_field){
+            if ((count($request->file('images')) < $item->count_field)){
                 return back()->with('message', 'Вы пытаетесь загрузить меньше фотографий чем у вас полей в коллаже');
             }
             else {
